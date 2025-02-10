@@ -66,22 +66,6 @@
             margin-top: 10px;
             display: none;
         }
-        .user-info {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            display: none;
-        }
-        .user-info img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            vertical-align: middle;
-        }
-        .user-info span {
-            margin-left: 10px;
-            vertical-align: middle;
-        }
         .messageBox {
             width: 600px;
             margin: 0 auto;
@@ -148,6 +132,9 @@
         <br>
         <h1>咱就是说我在我的存档中发现了一直棕色羊和棕色小羊，这稀有吗?</h1>
         <br>
+        <h1>感谢人员名单：</h1>
+        <a>wertg7o,小云-加班,GM,Minecraft苦力怕姐说,Minecraft史蒂,sk 开头的（后面的我记不清了）,CMZ,海绵科创全体人员,159 开头的,阿牛yy</a>
+        <br>
         <h1>留言板</h1>
         <div class="messageBox">
             <h2>留言内容</h2>
@@ -161,35 +148,31 @@
             </form>
         </div>
     </div>
-    <div class="user-info" id="user-info">
-        <img src="https://i0.hdslb.com/bfs/face/970398b8221681576591373b5537fb6369faf295.jpg@128w_128h_1c_1s.webp" alt="User Avatar">
-        <span id="user-name">xmxwp</span>
-    </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        // 静态用户信息
+        const users = [
+            { username: 'xmxwp', password: '123456' },
+            { username: 'testuser', password: 'testpass' }
+        ];
+
+        // 登录逻辑
         document.getElementById('login-form').addEventListener('submit', function(event) {
             event.preventDefault();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
             const successMessage = document.getElementById('success-message');
-            const userInfo = document.getElementById('user-info');
-            const userNameDisplay = document.getElementById('user-name');
             const mainContent = document.getElementById('main-content');
             const loginContainer = document.getElementById('login-container');
 
-            // 示例用户名和密码，仅用于演示
-            const validUsername = 'xmxwp';
-            const validPassword = '123456';
+            const user = users.find(u => u.username === username && u.password === password);
 
-            if (username === validUsername && password === validPassword) {
+            if (user) {
                 // 显示登录成功信息
                 successMessage.style.display = 'block';
                 errorMessage.style.display = 'none';
-
-                // 显示用户信息
-                userNameDisplay.textContent = username;
-                userInfo.style.display = 'block';
 
                 // 隐藏登录界面并显示主页内容
                 setTimeout(function() {
@@ -201,6 +184,30 @@
                 errorMessage.style.display = 'block';
                 successMessage.style.display = 'none';
             }
+        });
+
+        // 留言逻辑
+        $(document).ready(function () {
+            let $messageBox = $('.messageBox');
+            let $messages = $messageBox.find('.messages');
+            let $form = $messageBox.find('.form');
+            let $textarea = $form.find('.messageInput');
+            let $submitBtn = $form.find('button[type="submit"]');
+
+            // 使用AJAX提交留言
+            $form.submit(function (event) {
+                event.preventDefault();
+
+                let messageText = $textarea.val().trim();
+                if (messageText === '') {
+                    alert('请输入留言内容');
+                    return;
+                }
+
+                // 添加留言到页面
+                $messages.append('<li>' + messageText + '</li>');
+                $textarea.val(''); // 清空输入框
+            });
         });
     </script>
 </body>
