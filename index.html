@@ -1,20 +1,97 @@
 <!DOCTYPE html>
 <html>
 <head> 
-<meta charset="utf-8">
-<title>xmxwp的小网站</title>
-</head>
-<body>
+    <meta charset="utf-8">
+    <title>xmxwp的小网站</title>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
     <meta name="description" content="笑园答事&xmxwp官网">
     <meta http-equiv="refresh" content="180">
-    <h1>这是我的(xmxwp)网站，日后会更一些mc的事</h1>
-    <a>我的账号：xmxwp（哔哩哔哩）在下面</a>
-      <li> <a href="https://space.bilibili.com/3494354073159745?spm_id_from=333.337.0.0">xmxwp哔哩哔哩账号</a> </li>
-    <br>
-    <h1>咱就是说我在我的存档中发现了一直棕色羊和棕色小羊，这稀有吗?</h1>
-    <br>
-    <h1>感谢人员名单：</h1>
-    <a>wertg7o,小云-加班,GM,Minecraft苦力怕姐说,Minecraft史蒂,sk 开头的（后面的我记不清了）,CMZ,海绵科创全体人员,159 开头的,阿牛yy</a>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .main-content {
+            text-align: center;
+            padding: 20px;
+            display: none; /* 默认隐藏主页内容 */
+        }
+        .login-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+        }
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .login-container input[type="submit"],
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .login-container input[type="submit"]:hover,
+        .login-container button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" id="login-container">
+        <h2>Login</h2>
+        <form id="login-form">
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="submit" value="Login">
+            <button type="button" id="skip-login">Skip Login</button>
+        </form>
+    </div>
+    <div class="main-content" id="main-content">
+        <h1>这是我的(xmxwp)网站，日后会更一些mc的事</h1>
+        <a>我的账号：xmxwp（哔哩哔哩）在下面</a>
+        <li> <a href="https://space.bilibili.com/3494354073159745?spm_id_from=333.337.0.0">xmxwp哔哩哔哩账号</a> </li>
+        <br>
+        <h1>咱就是说我在我的存档中发现了一直棕色羊和棕色小羊，这稀有吗?</h1>
+        <br>
+        <h1>感谢人员名单：</h1>
+        <a>wertg7o,小云-加班,GM,Minecraft苦力怕姐说,Minecraft史蒂,sk 开头的（后面的我记不清了）,CMZ,海绵科创全体人员,159 开头的,阿牛yy</a>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Hide the login container and show the main content
+            document.getElementById('login-container').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+        });
+
+        document.getElementById('skip-login').addEventListener('click', function() {
+            // Hide the login container and show the main content
+            document.getElementById('login-container').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+        });
+    </script>
 </body>
 </html>
