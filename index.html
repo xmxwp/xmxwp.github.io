@@ -162,37 +162,38 @@
         // 当前登录用户
         let currentUser = null;
 
-        // 登录逻辑
-        document.getElementById('login-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const errorMessage = document.getElementById('error-message');
-            const successMessage = document.getElementById('success-message');
-            const mainContent = document.getElementById('main-content');
-            const loginContainer = document.getElementById('login-container');
+       // 登录逻辑
+document.getElementById('login-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const errorMessage = document.getElementById('error-message');
+    const successMessage = document.getElementById('success-message');
+    const mainContent = document.getElementById('main-content');
+    const loginContainer = document.getElementById('login-container');
 
-            const user = users.find(u => u.username === username && u.password === password);
+    const user = users.find(u => u.username === username && u.password === password);
 
-            if (user) {
-                // 保存当前登录用户
-                currentUser = user.username;
+    if (user) {
+        // 保存当前登录用户
+        currentUser = user.username;
 
-                // 显示登录成功信息
-                successMessage.style.display = 'block';
-                errorMessage.style.display = 'none';
+        // 显示登录成功信息
+        successMessage.style.display = 'block';
+        errorMessage.style.display = 'none';
 
-                // 隐藏登录界面并显示主页内容
-                setTimeout(function() {
-                    loginContainer.style.display = 'none';
-                    mainContent.style.display = 'block';
-                }, 1000); // 1秒后跳转
-            } else {
-                // 显示错误信息
-                errorMessage.style.display = 'block';
-                successMessage.style.display = 'none';
-            }
-        });
+        // 隐藏登录界面并显示主页内容
+        setTimeout(function() {
+            loginContainer.style.display = 'none';
+            mainContent.style.display = 'block';
+        }, 1000); // 1秒后跳转
+    } else {
+        // 显示错误信息
+        errorMessage.style.display = 'block';
+        successMessage.style.display = 'none';
+    }
+});
+
 
         // 初始化Pusher
         var pusher = new Pusher('34dd71010acc38dc6316', {
