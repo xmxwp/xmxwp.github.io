@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>xmxwp的小网站</title>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
-    <meta name="description" content="xmxwp官网">
+    <meta name="description" content="笑园答事&xmxwp官网">
     <meta http-equiv="refresh" content="180">
     <style>
         body {
@@ -60,6 +60,74 @@
             color: red;
             text-align: center;
             margin-top: 10px;
+            display: none;
+        }
+        .success-message {
+            color: green;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+        .user-info {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            display: none;
+        }
+        .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+        .user-info span {
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        .messageBox {
+            width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: '微软雅黑';
+            background-color: #f5f5f5;
+            text-align: center;
+        }
+        .messageBox h2 {
+            border-bottom: 1px solid black;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .messageBox .messages {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+        .messageBox .messages li {
+            margin-bottom: 10px;
+            padding: 5px 10px;
+        }
+        .messageBox textarea {
+            width: 500px;
+            height: 100px;
+        }
+        .box {
+            width: 600px;
+            margin: 0 auto;
+            padding: 10px 0px;
+            border: black solid 1px;
+        }
+        p {
+            text-align: left;
+        }
+        button {
+            font-size: 20px;
+            margin: 10px;
+            width: 120px;
+            height: 40px;
+            background-color: aquamarine;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
         }
     </style>
 </head>
@@ -70,9 +138,10 @@
             <input type="text" id="username" name="username" placeholder="用户名" required>
             <input type="password" id="password" name="password" placeholder="密码" required>
             <input type="submit" value="登录">
-            <button type="button" id="skip-login">跳过登录</button>
+            <button type="button" id="register">注册</button>
         </form>
-        <div class="error-message" id="error-message" style="display: none;">用户名或密码错误</div>
+        <div class="error-message" id="error-message">用户名或密码错误</div>
+        <div class="success-message" id="success-message">登录成功</div>
     </div>
     <div class="main-content" id="main-content">
         <h1>这是我的(xmxwp)网站，日后会更一些mc的事</h1>
@@ -81,36 +150,82 @@
         <br>
         <h1>咱就是说我在我的存档中发现了一直棕色羊和棕色小羊，这稀有吗?</h1>
         <br>
-        <h1>感谢人员名单：</h1>
-        <a>wertg7o,小云-加班,GM,Minecraft苦力怕姐说,Minecraft史蒂,sk 开头的（后面的我记不清了）,CMZ,海绵科创全体人员,159 开头的,阿牛yy</a>
+        <h1>留言板</h1>
+        <div class="messageBox">
+            <h2>留言内容</h2>
+            <div class="box">
+                <ul class="messages" id="messages"></ul>
+            </div>
+            <form class="form" id="message-form">
+                <p>请输入留言：</p>
+                <textarea class="messageInput" id="message-input" placeholder="请输入留言"></textarea>
+                <button type="submit">发表留言</button>
+            </form>
+        </div>
+    </div>
+    <div class="user-info" id="user-info">
+        <img src="https://i0.hdslb.com/bfs/face/970398b8221681576591373b5537fb6369faf295.jpg@128w_128h_1c_1s.webp" alt="User Avatar">
+        <span id="user-name">xmxwp</span>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         document.getElementById('login-form').addEventListener('submit', function(event) {
             event.preventDefault();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
+            const successMessage = document.getElementById('success-message');
+            const userInfo = document.getElementById('user-info');
+            const userNameDisplay = document.getElementById('user-name');
 
             // 示例用户名和密码，仅用于演示
             const validUsername = 'xmxwp';
             const validPassword = '123456';
 
             if (username === validUsername && password === validPassword) {
+                // 显示登录成功信息
+                successMessage.style.display = 'block';
+                errorMessage.style.display = 'none';
+
+                // 显示用户信息
+                userNameDisplay.textContent = username;
+                userInfo.style.display = 'block';
+
                 // 隐藏登录界面并显示主页内容
-                document.getElementById('login-container').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
+                setTimeout(function() {
+                    document.getElementById('login-container').style.display = 'none';
+                    document.getElementById('main-content').style.display = 'block';
+                }, 1000); // 1秒后跳转
             } else {
                 // 显示错误信息
                 errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
             }
         });
 
-        document.getElementById('skip-login').addEventListener('click', function() {
-            // 隐藏登录界面并显示主页内容
-            document.getElementById('login-container').style.display = 'none';
-            document.getElementById('main-content').style.display = 'block';
+        document.getElementById('register').addEventListener('click', function() {
+            // 跳转到注册页面
+            window.location.href = 'register.html';
         });
-    </script>
-</body>
-</html>
+
+        $(document).ready(function () {
+            var num = 1;
+            let $messageBox = $('.messageBox');
+            let $messages = $messageBox.find('.messages');
+            let $form = $messageBox.find('.form');
+            let $textarea = $form.find('.messageInput');
+            let $submitBtn = $form.find('button[type="submit"]');
+
+            // 添加留言
+            $form.submit(function (event) {
+                event.preventDefault();
+
+                let messageText = $textarea.val().trim();
+                if (messageText === '') {
+                    alert('请输入留言内容');
+                    return;
+                }
+
+                // 添加留言到页面
+                $
