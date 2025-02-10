@@ -178,21 +178,20 @@ document.getElementById('login-form').addEventListener('submit', function(event)
         // 保存当前登录用户
         currentUser = user.username;
 
+        // 隐藏登录界面并显示主页内容
+        loginContainer.style.display = 'none';
+        mainContent.style.display = 'block';
+
         // 显示登录成功信息
         successMessage.style.display = 'block';
         errorMessage.style.display = 'none';
-
-        // 隐藏登录界面并显示主页内容
-        setTimeout(function() {
-            loginContainer.style.display = 'none';
-            mainContent.style.display = 'block';
-        }, 1000); // 1秒后跳转
     } else {
         // 显示错误信息
         errorMessage.style.display = 'block';
         successMessage.style.display = 'none';
     }
 });
+
 
 
         // 初始化Pusher
