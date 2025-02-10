@@ -9,7 +9,6 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
         }
@@ -66,50 +65,12 @@
             margin-top: 10px;
             display: none;
         }
-        .messageBox {
-            width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            font-family: '微软雅黑';
-            background-color: #f5f5f5;
-            text-align: center;
-        }
-        .messageBox h2 {
-            border-bottom: 1px solid black;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-        .messageBox .messages {
-            list-style: none;
-            padding: 0;
-            text-align: left;
-        }
-        .messageBox .messages li {
-            margin-bottom: 10px;
-            padding: 5px 10px;
-        }
-        .messageBox textarea {
-            width: 500px;
-            height: 100px;
-        }
-        .box {
-            width: 600px;
-            margin: 0 auto;
-            padding: 10px 0px;
-            border: black solid 1px;
-        }
-        p {
-            text-align: left;
-        }
-        button {
-            font-size: 20px;
-            margin: 10px;
-            width: 120px;
-            height: 40px;
-            background-color: aquamarine;
-            cursor: pointer;
-            border-radius: 5px;
-            border: none;
+        .main-content {
+            background-image: url('photo/bj1.png'); /* 设置主页背景图片 */
+            background-size: 1920px 1080px; /* 设置背景图片大小 */
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh; /* 确保背景图片覆盖整个视口 */
         }
     </style>
 </head>
@@ -123,42 +84,25 @@
         </form>
         <div class="error-message" id="error-message">用户名或密码错误</div>
         <div class="success-message" id="success-message">登录成功</div>
-        <p>如果您还没有账号，请联系管理员进行注册</p>
+        <p>如果您还没有账号，请联系管理员进行注册,qq:3698464708</p>
     </div>
     <div class="main-content" id="main-content">
         <h1>这是我的(xmxwp)网站，日后会更一些mc的事</h1>
         <a>我的账号：xmxwp（哔哩哔哩）在下面</a>
         <li> <a href="https://space.bilibili.com/3494354073159745?spm_id_from=333.337.0.0">xmxwp哔哩哔哩账号</a> </li>
         <br>
-        <h1>咱就是说我在我的存档中发现了一只棕色羊和棕色小羊，这稀有吗?</h1>
+        <h1>咱就是说我在我的存档中发现了一直棕色羊和棕色小羊，这稀有吗?</h1>
         <br>
         <h1>感谢人员名单：</h1>
         <a>wertg7o,小云-加班,GM,Minecraft苦力怕姐说,Minecraft史蒂,sk 开头的（后面的我记不清了）,CMZ,海绵科创全体人员,159 开头的,阿牛yy</a>
-        <br>
-        <h1>留言板</h1>
-        <div class="messageBox">
-            <h2>留言内容</h2>
-            <div class="box">
-                <ul class="messages" id="messages"></ul>
-            </div>
-            <form class="form" id="message-form">
-                <p>请输入留言：</p>
-                <textarea class="messageInput" id="message-input" placeholder="请输入留言"></textarea>
-                <button type="submit">发表留言</button>
-            </form>
-        </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         // 静态用户信息
         const users = [
             { username: 'xmxwp', password: '123456' },
             { username: 'testuser', password: 'testpass' }
         ];
-
-        // 当前登录用户
-        let currentUser = null;
 
         // 登录逻辑
         document.getElementById('login-form').addEventListener('submit', function(event) {
@@ -173,9 +117,6 @@
             const user = users.find(u => u.username === username && u.password === password);
 
             if (user) {
-                // 保存当前登录用户
-                currentUser = user.username;
-
                 // 显示登录成功信息
                 successMessage.style.display = 'block';
                 errorMessage.style.display = 'none';
@@ -190,35 +131,6 @@
                 errorMessage.style.display = 'block';
                 successMessage.style.display = 'none';
             }
-        });
-
-        // 留言逻辑
-        $(document).ready(function () {
-            let $messageBox = $('.messageBox');
-            let $messages = $messageBox.find('.messages');
-            let $form = $messageBox.find('.form');
-            let $textarea = $form.find('.messageInput');
-            let $submitBtn = $form.find('button[type="submit"]');
-
-            // 使用AJAX提交留言
-            $form.submit(function (event) {
-                event.preventDefault();
-
-                let messageText = $textarea.val().trim();
-                if (messageText === '') {
-                    alert('请输入留言内容');
-                    return;
-                }
-
-                // 确保用户已登录
-                if (currentUser) {
-                    // 添加留言到页面，包含用户名和留言内容
-                    $messages.append('<li><strong>' + currentUser + ':</strong> ' + messageText + '</li>');
-                    $textarea.val(''); // 清空输入框
-                } else {
-                    alert('请先登录后再发表留言');
-                }
-            });
         });
     </script>
 </body>
