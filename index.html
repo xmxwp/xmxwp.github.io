@@ -153,16 +153,16 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script>
-        // 静态用户信息
-        const users = [
-            { username: 'xmxwp', password: '123456' },
-            { username: 'testuser', password: 'testpass' }
-        ];
+       // 静态用户信息
+const users = [
+    { username: 'xmxwp', password: '123456' },
+    { username: 'testuser', password: 'testpass' }
+];
 
-        // 当前登录用户
-        let currentUser = null;
+// 当前登录用户
+let currentUser = null;
 
-       // 登录逻辑
+// 登录逻辑
 document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault();
     const username = document.getElementById('username').value;
